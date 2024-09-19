@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "description": "a backend practice with chai aur code channel",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [
     "\"javascript\""
   ],
   "author": "Divyanshu Dwivedi",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^3.1.6"
-  }
+  "license": "ISC"
 }
