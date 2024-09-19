@@ -11,5 +11,9 @@
     "\"javascript\""
   ],
   "author": "Divyanshu Dwivedi",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.6",
+    "prettier": "^3.3.3"
+  }
 }
