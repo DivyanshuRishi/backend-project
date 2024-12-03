@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
                 type: mongoose.Schema.Types.ObjectId,
                 ref:"Video"
             }
-        ],userName:{
+        ],username:{
             type:String,
             required:true,
             unique:true,
@@ -26,13 +26,13 @@ const userSchema = new mongoose.Schema(
         },password:{
             type:String,
             required:[true,"Password is required"],
-            unique:true,
+            
         },fullName:{
             type:String,
             required:true,
             index:true,
             trim:true
-        },avtar:{
+        },avatar:{
             type:String, //Cloudinary Url
             required:true,
         },coverImage:{
@@ -54,17 +54,17 @@ userSchema.pre("save",async function (next)
 )
 
 userSchema.methods.isPasswordCorrect = async function (password) {
-    await bcrypt.compare(password,this.password)
+    return await bcrypt.compare(password,this.password)
 }
 
 userSchema.methods.generateAccessToken = function () {
     return jwt.sign({
         _id:this._id,
         email:this.email,
-        userName:this.userName,
+        username:this.username,
         fullName:this.fullName
     },process.env.ACCESS_TOKEN_SECRET
-    ,process.env.ACCESS_TOKEN_EXPIRY
+    ,{expiresIn : process.env.ACCESS_TOKEN_EXPIRY}
 )
 }
 
@@ -74,7 +74,7 @@ userSchema.methods.generateRefreshToken = function () {
     return jwt.sign({
         _id:this._id
     },process.env.REFRESH_TOKEN_SECRET
-    ,process.env.REFRESH_TOKEN_EXPIRY
+    ,{expiresIn : process.env.REFRESH_TOKEN_EXPIRY}
 )
 }
 
